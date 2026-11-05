@@ -8,4 +8,4 @@ RUN useradd -m maple && mkdir -p /data && chown maple:maple /data
 USER maple
 ENV MAPLE_DB=/data/maple.sqlite3 MAPLE_COOKIE_SECURE=1
 EXPOSE 8000
-CMD ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "8000", "--proxy-headers", "--forwarded-allow-ips", "127.0.0.1"]
+CMD ["sh", "-c", "exec uvicorn server:app --host 0.0.0.0 --port ${PORT:-8000} --proxy-headers --forwarded-allow-ips 127.0.0.1"]
